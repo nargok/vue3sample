@@ -6,9 +6,23 @@ import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 
 import InputText from "primevue/inputtext";
+import { retrieveItem } from "@/api/item";
+import type { Item } from "@/types/item";
 
+const route = useRoute();
 const router = useRouter();
-const value = ref();
+const item = ref<Item>();
+
+const targetItemId = Number(route.params.id);
+
+const load = async () => {
+  const result = await retrieveItem(Number(targetItemId)).catch((e) =>
+    console.error(e.message)
+  );
+  item.value = result.data;
+};
+
+load();
 
 const clickButton = () => {
   console.log("登録するよ");
@@ -17,9 +31,9 @@ const clickButton = () => {
 </script>
 
 <template>
-  <div class="input-area">
+  <div v-if="item" class="input-area">
     <span class="p-float-label">
-      <InputText id="username" type="text" v-model="value" />
+      <InputText id="username" type="text" v-model="item.name" />
       <label for="username">Name</label>
     </span>
   </div>
