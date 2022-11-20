@@ -23,6 +23,11 @@ const router = createRouter({
       component: () => import("../views/item/ItemView.vue"),
     },
     {
+      path: "/item/register",
+      name: "itemRegister",
+      component: () => import("../views/item/RegisterView.vue"),
+    },
+    {
       path: "/item/:id",
       name: "itemEdit",
       component: () => import("../views/item/EditView.vue"),

@@ -6,38 +6,30 @@ import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 
 import InputText from "primevue/inputtext";
-import { retrieveItem, updateItem } from "@/api/item";
+import { registerItem, retrieveItem, updateItem } from "@/api/item";
 import type { Item } from "@/types/item";
 
 const route = useRoute();
 const router = useRouter();
-const item = ref<Item>();
+const name = ref<string>();
 
 const targetItemId = Number(route.params.id);
 
-const load = async () => {
-  const result = await retrieveItem(Number(targetItemId)).catch((e) =>
-    console.error(e.message)
-  );
-  item.value = result.data;
-};
-
-load();
-
 const clickButton = async () => {
-  await updateItem(item.value);
+  const item = { name: name.value };
+  await registerItem(item);
   router.push("/item");
 };
 </script>
 
 <template>
-  <div v-if="item" class="input-area">
+  <div class="input-area">
     <span class="p-float-label">
-      <InputText id="name" type="text" v-model="item.name" />
+      <InputText id="name" type="text" v-model="name" />
       <label for="name">Name</label>
     </span>
   </div>
-  <Button @click="clickButton">更新</Button>
+  <Button @click="clickButton">登録</Button>
 </template>
 
 <style scoped>

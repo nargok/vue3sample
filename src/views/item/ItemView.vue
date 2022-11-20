@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
 import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 import { fetchItemList } from "@/api/item";
@@ -8,11 +8,7 @@ import { fetchItemList } from "@/api/item";
 import ItemTable from "../../components/item/ItemTable.vue";
 import type { Item } from "@/types/item";
 
-// interface Item {
-//   id: number;
-//   name: string;
-// }
-
+const router = useRouter();
 const value = ref();
 const items = ref<Item[]>([]);
 
@@ -24,9 +20,9 @@ const load = async () => {
 load();
 
 const clickButton = () => {
-  console.log("ボタンおしたよ");
   console.log("items", items.value);
   console.log("items length", items.value.length);
+  router.push("/item/register");
 };
 </script>
 
@@ -36,7 +32,7 @@ const clickButton = () => {
     <div>
       <Button
         @click="clickButton"
-        label="click me"
+        label="登録"
         class="p-button-secondary"
       ></Button>
       <template v-if="items.length > 0">
