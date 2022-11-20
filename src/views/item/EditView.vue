@@ -6,7 +6,7 @@ import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 
 import InputText from "primevue/inputtext";
-import { retrieveItem, updateItem } from "@/api/item";
+import { deleteItem, retrieveItem, updateItem } from "@/api/item";
 import type { Item } from "@/types/item";
 
 const route = useRoute();
@@ -28,6 +28,16 @@ const clickButton = async () => {
   await updateItem(item.value);
   router.push("/item");
 };
+
+const clickDeleteButton = async () => {
+  const answer = confirm("本当に消しますか？");
+  if (answer) {
+    console.log("delete!");
+    await deleteItem(targetItemId);
+    router.push("/item");
+  }
+  console.log("anser", answer);
+};
 </script>
 
 <template>
@@ -38,6 +48,7 @@ const clickButton = async () => {
     </span>
   </div>
   <Button @click="clickButton">更新</Button>
+  <Button @click="clickDeleteButton" class="p-button-danger">削除</Button>
 </template>
 
 <style scoped>

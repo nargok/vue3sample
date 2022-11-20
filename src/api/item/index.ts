@@ -20,3 +20,7 @@ export const registerItem = (item: ItemRegisterForm) => {
 export const updateItem = (item: Item) => {
   return request.post("/items/update", item);
 };
+
+export const deleteItem = (id: number) => {
+  return request.delete(`/items/${id}`);
+};
