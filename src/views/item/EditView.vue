@@ -32,11 +32,9 @@ const clickButton = async () => {
 const clickDeleteButton = async () => {
   const answer = confirm("本当に消しますか？");
   if (answer) {
-    console.log("delete!");
     await deleteItem(targetItemId);
     router.push("/item");
   }
-  console.log("anser", answer);
 };
 </script>
 

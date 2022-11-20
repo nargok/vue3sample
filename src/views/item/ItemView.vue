@@ -20,8 +20,6 @@ const load = async () => {
 load();
 
 const clickButton = () => {
-  console.log("items", items.value);
-  console.log("items length", items.value.length);
   router.push("/item/register");
 };
 </script>
