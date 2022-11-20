@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
-import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 
 import InputText from "primevue/inputtext";
-import { registerItem, retrieveItem, updateItem } from "@/api/item";
-import type { Item } from "@/types/item";
+import { registerItem } from "@/api/item";
 
-const route = useRoute();
 const router = useRouter();
 const name = ref<string>();
-
-const targetItemId = Number(route.params.id);
 
 const clickButton = async () => {
   const item = { name: name.value };
