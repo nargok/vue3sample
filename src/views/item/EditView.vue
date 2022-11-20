@@ -6,7 +6,7 @@ import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 
 import InputText from "primevue/inputtext";
-import { retrieveItem } from "@/api/item";
+import { retrieveItem, updateItem } from "@/api/item";
 import type { Item } from "@/types/item";
 
 const route = useRoute();
@@ -24,8 +24,8 @@ const load = async () => {
 
 load();
 
-const clickButton = () => {
-  console.log("登録するよ");
+const clickButton = async () => {
+  await updateItem(item.value);
   router.push("/item");
 };
 </script>
@@ -37,7 +37,7 @@ const clickButton = () => {
       <label for="username">Name</label>
     </span>
   </div>
-  <Button @click="clickButton">登録</Button>
+  <Button @click="clickButton">更新</Button>
 </template>
 
 <style scoped>
